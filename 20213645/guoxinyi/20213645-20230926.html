@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaWebHomework4</title>
+    <style>
+        body{
+            font: 16px "simhei", Arial, Helvetica, sans-serif;
+            background-color: #f5f5f5;
+        }
+        body>div{
+            width: 1000px;
+            background-color: white;
+            margin: 0 auto;/*块级元素居中*/
+            overflow: hidden;/*解决上部元素粘连问题*/
+        }
+        #top{
+            background-color: white;
+            color: #606266;
+            font-size: 25px;
+            font-weight: 600;
+        }
+        body>div>div{
+            margin: 20px;
+        }
+        #main>div{
+            background-color: #E8E8E8;
+            padding: 16px;
+            font-family: -apple-system, SF UI Text, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif, SimHei, SimSun;
+            margin:12px 40px;
+        }
+        .main_z_z{
+            background-color: #f5f5f5;
+        }
+        h3{
+            color: #4f4f4f;
+            margin: 8px 0 16px 0;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 26px;
+        }
+        h4{
+            padding: 5px;
+        }
+        li{
+            margin-bottom: 5px;
+        }
+        img{
+            width: 25px;
+            float: right;
+        }
+        #xuehao{
+            float:right;
+            margin-right: 10px;
+        }
+        .main_p{
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div id="top">
+        <span>Gitbash基础操作</span>
+        <span id="xuehao">20213645</span>
+        <hr>
+    </div>
+    <div id="main">
+        <h3>一、简介</h3>
+        <div class="main_z">
+            <ul>
+                <li> 学习了ping、tracert、以及cut指令</li>
+
+            </ul>
+        </div>
+
+        <h3>二、命令</h3>
+        <div class="main_z">
+            <ol>
+                <li> ping   用于检测与另一个主机之间的网络连接 </li>
+            <ul>
+                <li> 在执行ping命令时，会发出要求回应的信息，若远端主机的网络功能没有问题就会回应该信息 </li>
+                <h5>代码示例： ping baidu.com</h5>
+            </ul>
+
+                <li> tracert  该命令用于显示数据包到主机间的路径 </li>
+                <ul>
+                    <li> 在执行tracert命令时，能够让用户追踪网络数据包的路由途径 </li>
+                    <h5>代码示例： tracert baidu.com</h5>
+                </ul>
+
+                <li> cut 该命令是一种文本处理工具，它可以提取指定字段或列。</li>
+                <ul>
+                    <li> 执行cut命令可以根据指定的分隔符或固定的字符位置来切割文本，并输出所选取的字段或列。  </li>
+                    <h5>代码示例： cut --delimiter=/ -f1 cet6.text | grep '^ab'</h5>
+                    <li>注释：cut命令可以搭配grep指令来使用，可以详细地查看特定字段的所有数据，上述代码就实现了这一点。<br>在cet6.txt文本文件中，通过cut指令，来查找ab开头的所有数据</li><br>
+                </ul>
+            </ol>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
