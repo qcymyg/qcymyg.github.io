@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>播放器</title>
+
+</head>
+
+<script type="text/javascript">
+    var mp4Files=[ "1.mp4",
+    "2.mp4",
+    "3.mp4",
+    "4.mp4",
+    "5.mp4"];
+</script>
+
+<body>
+<!--<video controls id="myVideo">-->
+<video id="myVideo"> </video>
+<div>
+
+    <button id=play>播放</button>
+    <button id=stop>暂停</button>
+    <button id=next>下一个</button>
+    <button id=last>上一个</button>
+
+</div>
+
+<!-- //<video controls src="video/myVideo"> -->
+<script>
+    //var myVideo=new video();
+    var myVideo=document.getElementById("myVideo");
+    var i=0;
+    myVideo.src="video/"+mp4Files[i];
+    document.getElementById("play").onclick=function(){
+        // myVideo.src="video/"+mp4Files;
+        myVideo.play();
+    };
+    document.getElementById("stop").onclick=function(){
+        myVideo.pause();
+    };
+
+    document.getElementById("next").onclick=function(){
+        if(i==mp4Files.length){
+            i=-1;
+        }
+        i++;
+        myVideo.src="video/"+mp4Files[i];
+        // myVideo.play();
+    };
+    document.getElementById("last").onclick = function (){
+        i--;
+        myVideo.src="video/"+mp4Files[i];
+        myVideo.play();
+        if (i==0){
+            i =mp4Files.length;
+        }
+    };
+
+</script>
+</body>
+
+
+</html>
