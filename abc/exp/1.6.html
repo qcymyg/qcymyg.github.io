@@ -79,11 +79,12 @@
      《WebAppUI设计开发》
     </p>
    </header>
-  <nav>
+   <nav>
     <button id="prev">向前</button>
     <button id="next">向后</button>
-   <button>其他</button>
+    <button id="about">关于本书</button>
   </nav>
+
  
 
    <main id="main">
@@ -111,10 +112,7 @@
       }else{
     UI.appWidth = window.innerWidth;
   }
-
-
   UI.appHeight = window.innerHeight; 
-
   let baseFont = UI.appWidth /20;
   //通过改变body对象的字体大小，这个属性可以影响其后代
   document.body.style.fontSize = baseFont +"px";
@@ -149,29 +147,43 @@ var Pointer = {};
       $("bookface").textContent= "鼠标按下，坐标："+"("+Pointer.x+","+Pointer.y+")";
 	}
    };
-  let handleEnd = function(ev){
-   Pointer.isDown=false;
-   ev.preventDefault()
-   //console.log(ev.touches)
-   if(ev.touches){
-     $("bookface").textContent= "触屏事件结束!";
-     if(Math.abs(Pointer.deltaX) > 100){
-         $("bookface").textContent += "，这是有效触屏滑动！"  ;
-     }else{
-	    $("bookface").textContent += " 本次算无效触屏滑动！"  ;
-		$("bookface").style.left = '7%' ;
-	 }
-   }else{ 
-   
-     $("bookface").textContent= "鼠标松开!";
-     if(Math.abs(Pointer.deltaX) > 100){
-         $("bookface").textContent += "，这是有效拖动！"  ;
-     }else{
-	    $("bookface").textContent += " 本次算无效拖动！"  ;
-		$("bookface").style.left = '7%' ;
-		}
-   }
-  };
+   let handleEnd = function (ev) {
+        Pointer.isDown = false;
+        ev.preventDefault()
+        let direction = Pointer.deltaX > 0 ? 'right' : 'left';
+        //console.log(ev.touches)
+        if (ev.touches) {
+          $("bookface").textContent = "触屏事件结束!";
+          if (Math.abs(Pointer.deltaX) > 100) {
+            $("bookface").textContent += "，这是有效触屏滑动！";
+            $("bookface").style.left = '7%';
+            if (direction === 'right') {
+              showNextImage();
+            } else {
+              showPrevImage();
+            }
+
+          } else {
+            $("bookface").textContent += " 本次算无效触屏滑动！";
+            $("bookface").style.left = '7%';
+          }
+        } else {
+
+          $("bookface").textContent = "鼠标松开!";
+          if (Math.abs(Pointer.deltaX) > 100) {
+            $("bookface").textContent += "，这是有效拖动！";
+            $("bookface").style.left = '7%';
+            if (direction === 'right') {
+              showNextImage();
+            } else {
+              showPrevImage();
+            }
+          } else {
+            $("bookface").textContent += " 本次算无效拖动！";
+            $("bookface").style.left = '7%';
+          }
+        }
+      };
  let handleMoving = function(ev){
     ev.preventDefault();
    if (ev.touches){
@@ -260,36 +272,42 @@ function $(ele){
        } //end of $
        var myDiv = document.getElementById('bookface');
     var images = [
-        "../lesson/back.jpg",
-        "../lesson/CS.jpg",
-        "../lesson/CSS.jpg",
-        "../lesson/CT.jpg",
-        "../lesson/Git.jpg",
-        "../lesson/internet.jpg",
-        "../lesson/javaScript.jpg",
-        "../lesson/learnCSS.jpg",
-        "../lesson/linuxCMD.jpg",
-        "../lesson/STEM.jpg",
-        "../lesson/ted.jpg",
-        "../lesson/UML.jpg",
-        "../lesson/videos.jpg",
-        "../lesson/webProgramming.jpg",
+      "../lesson/CS.jpg",
+      "../lesson/CSS.jpg",
+      "../lesson/linuxCMD.jpg",
+      "../lesson/Http.jpg"
+    ];
+    var pdf = [
+      "../pdf/CS.pdf",
+      "../pdf/CSS.pdf",
+      "../pdf/linuxCMD.pdf",
+      "../pdf/Http.pdf"
     ];
     //当前位置
     var currentImageIndex = 0;
 
-    document.getElementById("next").onclick = function () {
-        currentImageIndex++;
-        if (currentImageIndex == images.length) currentImageIndex = 0;
-        myDiv.style.backgroundImage = 'url(' + images[currentImageIndex] + ')';
-    };
-    document.getElementById("prev").onclick = function () {
-        currentImageIndex--;
-        if (currentImageIndex == -1)currentImageIndex = images.length - 1;
-        myDiv.style.backgroundImage = 'url(' + images[currentImageIndex] + ')';
-     
-    };
+    // 定义下一个图片的函数
+    function showNextImage() {
+      currentImageIndex++;
+      if (currentImageIndex == images.length) currentImageIndex = 0;
+      myDiv.style.backgroundImage = 'url(' + images[currentImageIndex] + ')';
+    }
 
+    // 定义上一个图片的函数
+    function showPrevImage() {
+      currentImageIndex--;
+      if (currentImageIndex == -1) currentImageIndex = images.length - 1;
+      myDiv.style.backgroundImage = 'url(' + images[currentImageIndex] + ')';
+    }
+
+    // 将函数绑定到点击事件
+    document.getElementById("next").onclick = showNextImage;
+    document.getElementById("prev").onclick = showPrevImage;
+    document.getElementById("about").onclick = function () {
+      var pdfUrl = 'path/to/your/document.pdf';
+      // 使用window.open打开PDF文件
+      window.open(pdf[currentImageIndex], '_blank');
+    }
 
  </script>
  </body>
